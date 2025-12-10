@@ -1,0 +1,168 @@
+.voice-bar-container {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    z-index: 100;
+    width: 100%;
+    pointer-events: none;
+}
+
+.voice-status-label {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--color-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: slideUpFade 0.4s forwards;
+    pointer-events: auto;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.mic-button {
+    width: 72px;
+    /* Slightly refined size */
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #34495E 100%);
+    /* Deep Slate */
+    color: white;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(44, 62, 80, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: auto;
+}
+
+.mic-button:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 15px 35px rgba(44, 62, 80, 0.4);
+    border-color: white;
+}
+
+.mic-button.active {
+    background: linear-gradient(135deg, var(--color-accent) 0%, #1ABC9C 100%);
+    /* Teal */
+    transform: scale(1.1);
+    box-shadow: 0 0 0 8px rgba(26, 188, 156, 0.2), 0 15px 35px rgba(26, 188, 156, 0.4);
+    border-color: white;
+}
+
+.mic-button.processing {
+    background: linear-gradient(135deg, #F1C40F 0%, #F39C12 100%);
+    /* Professional Amber */
+    box-shadow: 0 0 0 8px rgba(243, 156, 18, 0.2);
+    cursor: wait;
+}
+
+.spin {
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Waveform Animation */
+.visual-waveform {
+    display: flex;
+    gap: 6px;
+    height: 40px;
+    align-items: center;
+    margin-bottom: -5px;
+}
+
+.wave-bar {
+    width: 8px;
+    height: 12px;
+    background-color: var(--color-primary);
+    border-radius: 4px;
+    animation: wave 1s infinite ease-in-out;
+    box-shadow: 0 0 10px rgba(15, 163, 177, 0.5);
+}
+
+.wave-bar:nth-child(1) {
+    animation-delay: 0.0s;
+}
+
+.wave-bar:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.wave-bar:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.wave-bar:nth-child(4) {
+    animation-delay: 0.1s;
+}
+
+.wave-bar:nth-child(5) {
+    animation-delay: 0.0s;
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        height: 12px;
+        opacity: 0.6;
+    }
+
+    50% {
+        height: 40px;
+        opacity: 1;
+        filter: brightness(1.2);
+    }
+}
+
+.pulse-slow {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+}

@@ -1,0 +1,136 @@
+.tutor-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    min-height: 72px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
+    border-bottom: var(--glass-border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.header-left,
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.doc-title {
+    margin: 0;
+    font-size: 1.15rem;
+    /* More refined size */
+    color: var(--color-primary);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.badge {
+    background: rgba(44, 62, 80, 0.05);
+    color: var(--color-primary);
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    /* Corporate look */
+    font-weight: 500;
+    font-size: 0.85rem;
+    border: 1px solid rgba(44, 62, 80, 0.1);
+}
+
+.tutor-content {
+    display: flex;
+    gap: 2rem;
+    /* Airy spacing */
+    flex: 1;
+    overflow: hidden;
+    padding-top: 0.5rem;
+}
+
+/* Reader */
+.reader-section {
+    flex: 1.8;
+    /* Slightly narrower reading column */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+    background: white;
+    /* Clean paper look */
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+}
+
+.page-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 3.5rem;
+    /* CSS update pending check */
+    font-size: 1.25rem;
+    line-height: 1.9;
+    font-family: var(--font-body);
+    color: #334155;
+    /* Slate-700 for readability */
+}
+
+.page-controls-footer {
+    padding: 1.25rem 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: space-between;
+    background: #f8fafc;
+    /* Slate-50 */
+}
+
+/* Context & Transcript */
+.context-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 350px;
+}
+
+.context-container {
+    padding: 1.5rem;
+}
+
+.transcript-container {
+    flex: 1;
+    overflow: hidden;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .tutor-layout {
+        height: auto;
+        overflow-y: auto;
+    }
+
+    .tutor-content {
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .reader-section,
+    .context-section {
+        flex: none;
+        height: auto;
+    }
+
+    .page-content {
+        min-height: 400px;
+    }
+}

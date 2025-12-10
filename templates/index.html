@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Voice Tutor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark">
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">ChatGPT</div>
+      <nav>
+        <a href="{{ url_for('new_chat') }}">New chat</a>
+        <a href="{{ url_for('search') }}">Search chats</a>
+        <a href="{{ url_for('library') }}">Library</a>
+        <a href="{{ url_for('projects') }}">Projects</a>
+      </nav>
+    </aside>
+    <main class="content">
+      {% if mode == 'home' %}
+        {% if error %}<div class="error">{{ error }}</div>{% endif %}
+        <div class="hero">What can I help with?</div>
+        <form id="homeUpload" class="prompt" action="/upload" method="post" enctype="multipart/form-data">
+          <label class="upload-btn">
+            <input id="pdfInput" type="file" name="pdf" accept="application/pdf">
+            Upload PDF
+          </label>
+          <button type="submit" class="primary">Use</button>
+          <div class="ask">
+            <span>Ask anything</span>
+            <button id="micBtn" type="button" class="mic">🎤</button>
+          </div>
+        </form>
+      {% elif mode == 'chat' %}
+        <div class="meta">Page {{ current_page + 1 }} • Chunk {{ current_chunk }}</div>
+        <div id="chat" class="chat">
+          {% for m in messages %}
+            <div class="msg {{ 'user' if m['role'] == 'User' else 'assistant' }}">
+              <div class="bubble">{{ m['text'] }}</div>
+              {% if m['audio'] %}
+                <audio src="{{ url_for('audio', fname=m['audio']) }}" autoplay controls></audio>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+        <form id="chatForm" class="composer" action="/chat" method="post">
+          <input id="msgInput" type="text" name="message" placeholder="Type or use voice">
+          <button type="submit">Send</button>
+          <a class="secondary" href="{{ url_for('library') }}">Change PDF</a>
+          <div class="actions">
+            <button type="button" class="action" data-msg="summarize">Summarize</button>
+            <button type="button" class="action" data-msg="explain">Explain</button>
+            <button type="button" class="action" data-msg="translate to english">Translate</button>
+            <button type="button" class="action" data-msg="quiz">Quiz</button>
+            <button type="button" class="action" data-msg="next page">Next</button>
+            <button type="button" class="action" data-msg="previous page">Prev</button>
+          </div>
+        </form>
+      {% elif mode == 'library' %}
+        <div class="section-title">Library</div>
+        <ul class="list">
+          {% for f in files %}
+            <li>
+              <a href="{{ url_for('use_pdf', pdf_id=f.id) }}">{{ f.filename }}</a>
+              <form style="display:inline" action="{{ url_for('delete_pdf_route', pdf_id=f.id) }}" method="post">
+                <button type="submit">Delete</button>
+              </form>
+              <span class="meta">ID: {{ f.id }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% elif mode == 'search' %}
+        <div class="section-title">Search chats</div>
+        <form class="searchbar" action="/search" method="get">
+          <input type="text" name="q" value="{{ query or '' }}" placeholder="Search in current chat">
+          <button type="submit">Search</button>
+        </form>
+        <div class="results">
+          {% for r in results %}
+            <div class="result"><b>{{ r.role }}:</b> {{ r.text }}</div>
+          {% endfor %}
+          {% if (results|length) == 0 and query %}
+            <div class="empty">No matches found</div>
+          {% endif %}
+        </div>
+      {% elif mode == 'projects' %}
+        <div class="section-title">Projects</div>
+        <form class="searchbar" action="/projects/new" method="post">
+          <input type="text" name="name" placeholder="New project name">
+          <button type="submit">Create</button>
+        </form>
+        <ul class="list">
+          {% for p in projects %}
+            <li><a href="{{ url_for('project_detail', pid=p.id) }}">{{ p.name }}</a></li>
+          {% endfor %}
+        </ul>
+      {% elif mode == 'project' %}
+        <div class="section-title">{{ project.name }}</div>
+        <div class="section-title">PDFs</div>
+        <form class="upload" action="{{ url_for('project_upload', pid=project.id) }}" method="post" enctype="multipart/form-data">
+          <input type="file" name="pdf" accept="application/pdf">
+          <button type="submit">Upload</button>
+        </form>
+        <ul class="list">
+          {% for f in files %}
+            <li>{{ f.filename }} <span class="meta">#{{ f.id }}</span></li>
+          {% endfor %}
+        </ul>
+        <div class="section-title">Chats</div>
+        <form class="searchbar" action="{{ url_for('project_chat_new', pid=project.id) }}" method="post">
+          <input type="text" name="title" placeholder="Chat title">
+          <select name="pdf_id">
+            <option value="">Select PDF (optional)</option>
+            {% for f in files %}
+              <option value="{{ f.id }}">{{ f.filename }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit">Start</button>
+        </form>
+        <ul class="list">
+          {% for c in chats %}
+            <li>#{{ c.id }} — {{ c.title }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

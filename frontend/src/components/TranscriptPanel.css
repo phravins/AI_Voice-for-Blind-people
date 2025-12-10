@@ -1,0 +1,35 @@
+.transcript-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 300px;
+}
+
+.messages-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-right: 0.5rem;
+}
+
+.message {
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.message.user {
+    background: #E0F2FE;
+    align-self: flex-end;
+    max-width: 80%;
+    color: #0369A1;
+}
+
+.message.assistant {
+    background: #F3F4F6;
+    align-self: flex-start;
+    max-width: 90%;
+}

@@ -1,0 +1,30 @@
+.context-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #F3F4F6;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+    color: var(--color-text-main);
+}
+
+.action-btn:hover {
+    background: #E5E7EB;
+}
