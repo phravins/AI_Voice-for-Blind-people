@@ -2,7 +2,7 @@
 
 An intelligent, voice-controlled educational assistant that reads, summarizes, and explains PDF documents. Built with React, Flask, and the Google Gemini API, it offers a hands-free learning experience.
 
-## 🚀 Features
+## Features
 
 *   **Hands-Free Voice Control**:
     *   **Wake Word**: Say "Wake" to activate the assistant ("Hi, how can I help?").
@@ -19,7 +19,7 @@ An intelligent, voice-controlled educational assistant that reads, summarizes, a
     *   Real-time transcription of your voice commands.
     *   Context-aware insights.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 *   **React (Vite)**: Fast, modern UI framework.
@@ -33,13 +33,13 @@ An intelligent, voice-controlled educational assistant that reads, summarizes, a
 *   **TTS (Text-to-Speech)**: `gTTS` (Google Text-to-Speech) for generating audio responses.
 *   **Database**: SQLite/JSON (for session and logical document mapping).
 
-## 📋 Prerequisites
+## Prerequisites
 
 *   **Node.js** (v16+)
 *   **Python** (v3.10+)
 *   **Google Gemini API Key**
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 1.  **Clone the Repository**
     ```bash
@@ -89,7 +89,7 @@ An intelligent, voice-controlled educational assistant that reads, summarizes, a
         ```
     *   Open your browser to `http://localhost:5173`.
 
-## 🎤 Voice Commands Cheat Sheet
+## Voice Commands Cheat Sheet
 
 | Intent | Commands | Action |
 | :--- | :--- | :--- |
@@ -102,7 +102,7 @@ An intelligent, voice-controlled educational assistant that reads, summarizes, a
 | **Stop** | "Stop", "Quiet", "Exit" | Stops audio and deactivates listening loop. |
 | **Quiz** | "Quiz me", "Ask me a question" | Generates a quiz question from the page. |
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ai_voice_tutor/
